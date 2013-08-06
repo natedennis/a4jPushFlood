@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:b="http://richfaces.org/sandbox/bootstrap"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"	
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:forgeview="http://jboss.org/forge/view"	
+	template="/resources/scaffold/pageTemplateQueue.xhtml">
+
+	<ui:param name="pageTitle"
+		value="Test ComponentControl" />
+
+	<ui:define name="header">
+		Test 
+	</ui:define>
+
+	<ui:define name="main">
+	
+	 	<h:form id="changeform">
+	 	
+		 	 <rich:popupPanel id="popup"  modal="true" resizeable="true" onmaskclick="#{rich:component('popup')}.hide();">
+		 		<a4j:outputPanel id="popuprender">
+			       		<h:panelGrid columns="2">
+							<h:outputText style="white-space:nowrap" value="Bar:" />
+							<h:outputText value="foo"/>
+						</h:panelGrid>
+					</a4j:outputPanel>
+				 <a href="#" onclick="#{rich:component('popup')}.hide()">hide this panel</a>:
+		    </rich:popupPanel>
+	 	</h:form>
+	 	
+		<h:form id="globalform">
+
+ 	
+		<a4j:outputPanel id="cfpanel" ajaxRendered="false">
+				<a4j:commandLink value="Working" 
+							execute="@this" render="popuprender"
+							oncomplete="return #{rich:component('popup')}.show()">
+ 						<a4j:param name="id" value="1"   />		  
+				   	    <a4j:param name="clickSource"  value="0" />
+				 
+				    <rich:componentControl target="popup" operation="show" event="complete" >
+			            <a4j:param noEscape="true" value="event" />
+	    		        <rich:hashParam>
+		        	        <f:param name="width" value="500" />
+	                		<f:param name="height" value="300" />
+			                <f:param name="minWidth" value="300" />
+	        		        <f:param name="minHeight" value="150" />
+			                <a4j:param noEscape="true" name="left" value="(jQuery(window).width()/2)-250" />	
+	        		        <a4j:param noEscape="true" name="top" value="(jQuery(window).height()/2)-150" />
+			            </rich:hashParam>
+        			</rich:componentControl>
+				</a4j:commandLink>
+
+<br/><br/>
+				<a4j:commandLink value="wasnt working on my other page.. but is here" 
+							execute="@this" render="popuprender"
+							oncomplete="return #{rich:component('popup')}.show()">
+ 						<a4j:param name="id" value="1"   />		  
+				   	    <a4j:param name="clickSource"  value="0" />
+				 
+				    
+				</a4j:commandLink>
+<br/><br/>
+				<a4j:commandLink value="Would expect this to work but doesn't" 
+							execute="@this" render="popuprender">
+ 						<a4j:param name="id" value="1"   />		  
+				   	    <a4j:param name="clickSource"  value="0" />
+				 
+				    <rich:componentControl target="popup" operation="show" event="complete" >
+			            <a4j:param noEscape="true" value="event" />
+	    		        <rich:hashParam>
+		        	        <f:param name="width" value="500" />
+	                		<f:param name="height" value="300" />
+			                <f:param name="minWidth" value="300" />
+	        		        <f:param name="minHeight" value="150" />
+			                <a4j:param noEscape="true" name="left" value="(jQuery(window).width()/2)-250" />	
+	        		        <a4j:param noEscape="true" name="top" value="(jQuery(window).height()/2)-150" />
+			            </rich:hashParam>
+        			</rich:componentControl>
+				</a4j:commandLink>
+	</a4j:outputPanel>
+	</h:form>
+	</ui:define>
+
+</ui:composition>

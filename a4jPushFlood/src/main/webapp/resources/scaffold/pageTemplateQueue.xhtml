@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>#{empty pageTitle ? '{#pageTitle}' : pageTitle}</title>
+	<link rel="icon" href="#{resource['favicon.ico']}" />
+	<h:outputStylesheet name="bootstrap.css" />
+	<h:outputStylesheet name="forge-style.css" />
+</h:head>
+
+<h:body>
+
+<h:form id="headerform">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<h:link id="brandLink" outcome="/index.xhtml" styleClass="brand">Test A4j:push Fail</h:link>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li><h:link outcome="/public/kiosk.xhtml" value="Producer"  /></li>
+						<li><h:link outcome="/global/queue.xhtml" value="Consumer"  /></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</h:form>
+
+
+	<div class="container forgecontainer">
+
+		<div id="content" style="margin-left: 0px;">
+			<h1>
+				<ui:insert name="header" />
+			</h1>
+			<h2>
+				<ui:insert name="subheader" />
+			</h2>
+	        <a4j:status>
+	            <f:facet name="start">
+	
+	            </f:facet>
+	        </a4j:status>
+			<ui:insert name="main" />
+		</div>
+	</div>
+
+	<footer>
+		<div id="footer-wrapper">
+	
+	    </div>
+	</footer>
+
+</h:body>
+</html>
